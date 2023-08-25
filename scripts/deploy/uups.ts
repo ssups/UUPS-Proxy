@@ -15,6 +15,9 @@ async function main() {
 
   const version = await proxyContract.version();
   console.log("version: ", version);
+
+  const owner = await proxyContract.owner();
+  console.log(owner);
 }
 
 main().catch((error) => {

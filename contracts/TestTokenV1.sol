@@ -14,6 +14,7 @@ contract TestTokenV1 is Initializable, ERC20Upgradeable, UUPSUpgradeable, Ownabl
     }
     function init(uint initialMintAmount) initializer external {
         __ERC20_init("TestToken", "TTK");
+        __Ownable_init();
         _mint(msg.sender, initialMintAmount * 10 ** decimals());
     }
 
