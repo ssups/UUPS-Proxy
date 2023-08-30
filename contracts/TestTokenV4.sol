@@ -5,7 +5,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract TestTokenV2 is ERC20Upgradeable, UUPSUpgradeable, OwnableUpgradeable {
+contract TestTokenV4 is ERC20Upgradeable, UUPSUpgradeable, OwnableUpgradeable {
 
 /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -23,6 +23,6 @@ contract TestTokenV2 is ERC20Upgradeable, UUPSUpgradeable, OwnableUpgradeable {
     function _authorizeUpgrade(address) internal override onlyOwner {}
 
     function version() pure external returns(uint) {
-        return 2;
+        return 4;
     }
 }

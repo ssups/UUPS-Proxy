@@ -5,7 +5,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
-contract TestTokenV2 is ERC20Upgradeable, UUPSUpgradeable, OwnableUpgradeable {
+contract TestTokenV3 is ERC20Upgradeable, UUPSUpgradeable, OwnableUpgradeable {
 
 /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -17,12 +17,11 @@ contract TestTokenV2 is ERC20Upgradeable, UUPSUpgradeable, OwnableUpgradeable {
         _mint(msg.sender, initialMintAmount * 10 ** decimals());
     }
 
-    // uups proxy 패턴에서는 업그레이드 로직이 로직컨트렉트에 담겨있다.
-    // 따라서 UUPSUpgradeable 컨트렉트를 상속받고,
-    //  _authorizeUpgrade 함수를 접근제한자(ex onlyOwner) 걸어서 override 해줘야 한다
-    function _authorizeUpgrade(address) internal override onlyOwner {}
+    function _authorizeUpgrade(address) internal override onlyOwner {
+        revert("upgrade disabled");
+    }
 
     function version() pure external returns(uint) {
-        return 2;
+        return 3;
     }
 }
