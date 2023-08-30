@@ -26,15 +26,15 @@ describe("deploy & upgrade", () => {
     expect(await proxyC.version()).to.eq("2");
   });
 
-  it("upgrade to V3(disable upgrade)", async () => {
-    const factoryV3 = await ethers.getContractFactory("TestTokenV3");
-    await upgrades.upgradeProxy(proxyCA, factoryV3, { kind: "uups" });
+  it("disable upgrade", async () => {
+    const tx = await proxyC.disableUpgrade();
+    await tx.wait();
 
-    expect(await proxyC.version()).to.eq("3");
+    expect(await proxyC.isUpgradable()).to.eq("2");
   });
 
-  it("try to upgrade V4", async () => {
-    const factoryV4 = await ethers.getContractFactory("TestTokenV4");
+  it("try to upgrade V3", async () => {
+    const factoryV4 = await ethers.getContractFactory("TestTokenV3");
 
     // deploy implement contract
     const implementCA = await upgrades.prepareUpgrade(proxyCA, factoryV4, {

@@ -1,6 +1,6 @@
 import { ethers, upgrades } from "hardhat";
 
-const PROXY_CA = "0x7B1c9996a68a76eaaE4D762B93726BFce84edB76";
+const PROXY_CA = "0x70BaAbe2e1dD5C9C6a443fE2c27926796274ED6B";
 
 async function main() {
   const newFactory = await ethers.getContractFactory("TestTokenV2");
