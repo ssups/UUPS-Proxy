@@ -1,7 +1,6 @@
 import { ethers, upgrades } from "hardhat";
 import { expect } from "chai";
 import { Contract } from "ethers";
-import { makeUpgradeProxy } from "@openzeppelin/hardhat-upgrades/dist/upgrade-proxy";
 
 describe("deploy & upgrade", () => {
   let proxyCA: string;
@@ -23,6 +22,7 @@ describe("deploy & upgrade", () => {
   it("upgrade to V2", async () => {
     const factoryV2 = await ethers.getContractFactory("TestTokenV2");
     const upgradedProxy = await upgrades.upgradeProxy(proxyCA, factoryV2, { kind: "uups" });
+    // @ts-ignore
     await upgradedProxy.deployTransaction.wait();
     expect((await proxyC.version()).toString()).to.eq("2");
   });
